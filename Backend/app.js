@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const app = express();
 const User = require("./model/userModel");
 const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken')
 
 //Tell NodeJS to use dotenv
 require("dotenv").config();
@@ -74,8 +75,14 @@ app.post("/login", async (req, res) => {
   const isMatched = bcrypt.compareSync(password, userFound[0].userPassword);
 
   if (isMatched) {
+// Generate Token - Token is a unique identifier
+const token = jwt.sign({id: userFound[0]._id},process.env.SECRET_KEY,{
+  expiresIn: '30d'
+})
+
     res.status(200).json({
       message: "User logged in successfully",
+      token
     });
   } else {
     res.status(404).json({
