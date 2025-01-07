@@ -23,6 +23,9 @@ userEmail : {
         type : String,
         enum : ["customer","admin"],
         default : "customer"
+    },
+    otp:{
+type: Number
     }
 })
 
