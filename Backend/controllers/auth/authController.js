@@ -1,3 +1,4 @@
+//All logics goes here!
 const User = require("../../model/userModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -140,6 +141,7 @@ exports.verifyOtp = async (req, res) => {
   } else {
     //dispost the otp so can't be used next time!
     userExist[0].otp = undefined;
+    userExist[0].isOtpVerified = true;
     await userExist[0].save();
 
     res.status(200).json({
@@ -168,7 +170,16 @@ exports.resetPassword = async (req, res) => {
       message: "User email not registered!",
     });
   }
+
+  if (userExist[0].isOtpVerified !== true) {
+    return res.status(403).json({
+      message: "You cann't perform this acton",
+    });
+  }
+
   userExist[0].userPassword = bcrypt.hashSync(newPassword, 10);
+
+  userExist[0].isOtpVerified = false;
   await userExist[0].save();
 
   res.status(200).json({

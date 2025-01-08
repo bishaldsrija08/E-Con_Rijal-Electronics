@@ -1,5 +1,7 @@
 //Database Connection Code
 const mongoose = require("mongoose");
+const User = require("../model/userModel");
+const adminSeeder = require("../adminSeeder");
 exports.connectDatabase = async () => {
 
   //Connecting to DataBase code goes here
@@ -9,4 +11,7 @@ try {
 } catch (error) {
     console.log(error)
 }
-};
+
+//admin seed function invoke
+adminSeeder()
+ }

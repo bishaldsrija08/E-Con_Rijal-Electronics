@@ -2,16 +2,18 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 
-
 //Tell NodeJS to use dotenv
 require("dotenv").config();
 
 const { connectDatabase } = require("./database/database");
-const { loginUser, registerUser } = require("./controllers/auth/authController");
+const {
+  loginUser,
+  registerUser,
+} = require("./controllers/auth/authController");
 
 //Routes here
-const authRoute = require("./routes/aut/authRoute")
-
+const authRoute = require("./routes/aut/authRoute");
+const productRoute = require('./routes/product/productRoute')
 
 //Routes end here
 
@@ -29,7 +31,9 @@ app.get("/", (req, res) => {
   });
 });
 
-app.use("", authRoute)
+//Handling routes here!
+app.use("", authRoute);
+app.use("", productRoute)
 
 // Listen server
 const port = process.env.PORT;
