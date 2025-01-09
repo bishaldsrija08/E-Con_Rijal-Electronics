@@ -35,6 +35,10 @@ app.get("/", (req, res) => {
 app.use("", authRoute);
 app.use("", productRoute)
 
+
+//telling node to give access to uploads
+app.use(express.static('uploads'))
+
 // Listen server
 const port = process.env.PORT;
 app.listen(port, (req, res) => {

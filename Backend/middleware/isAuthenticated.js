@@ -1,3 +1,4 @@
+// User login xa ki nai check gareko!
 const jwt = require("jsonwebtoken");
 const User = require("../model/userModel");
 const promisify = require("util").promisify;
@@ -32,7 +33,7 @@ const isAuthenticated = async (req, res, next) => {
         message: "User doesn't exists with the token/id.",
       });
     }
-    req.User = doesUserExist;
+    req.user = doesUserExist;
 
     next()
     // console.log(decoded);
