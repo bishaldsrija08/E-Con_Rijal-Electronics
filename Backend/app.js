@@ -13,7 +13,7 @@ const {
 
 //Routes here
 const authRoute = require("./routes/aut/authRoute");
-const productRoute = require('./routes/product/productRoute')
+const productRoute = require("./routes/product/productRoute");
 
 //Routes end here
 
@@ -33,11 +33,10 @@ app.get("/", (req, res) => {
 
 //Handling routes here!
 app.use("", authRoute);
-app.use("", productRoute)
-
+app.use("", productRoute);
 
 //telling node to give access to uploads
-app.use(express.static('uploads'))
+app.use(express.static("uploads"));
 
 // Listen server
 const port = process.env.PORT;

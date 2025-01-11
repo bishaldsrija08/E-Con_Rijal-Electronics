@@ -35,7 +35,7 @@ const isAuthenticated = async (req, res, next) => {
     }
     req.user = doesUserExist;
 
-    next()
+    next();
     // console.log(decoded);
 
     // if (!decoded) {
@@ -44,14 +44,12 @@ const isAuthenticated = async (req, res, next) => {
     //   });
     // }
   } catch (error) {
-    res.status(400).json({
+    res.status(500).json({
       message: "Don't try to do this.",
     });
   }
 
   //Chec if decoded.id(userId) exists in the user talbe
-
-
 };
 
 module.exports = isAuthenticated;
