@@ -18,6 +18,7 @@ const userSchema = new Schema({
   userPassword: {
     type: String,
     required: [true, "Password must be provided"],
+    select: false
   },
   role: {
     type: String,
@@ -26,13 +27,15 @@ const userSchema = new Schema({
   },
   otp: {
     type: Number,
+    select: false
   },
   isOtpVerified: {
     type: Boolean,
-    default: false
+    default: false,
+    select: false
   },
-},{
-  timestamps:true
+}, {
+  timestamps: true
 });
 
 const User = mongoose.model("User", userSchema);

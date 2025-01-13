@@ -2,6 +2,8 @@ const {
   createProduct,
   getProduct,
   getProducts,
+  deleteProduct,
+  editProduct,
 } = require("../../controllers/admin/product/productController");
 const isAuthenticated = require("../../middleware/isAuthenticated");
 const restrictTo = require("../../middleware/restrictTo");
@@ -22,10 +24,10 @@ router
   ).get(catchAsync(getProducts))
 
 
-  //Get single product route
+//Get single product route
 
-router.route("/products/:id").get(catchAsync(getProduct))
-  
-  //Adi authorized xa vane adminlai matra product create garna diney!
+router.route("/products/:id").get(catchAsync(getProduct)).delete(isAuthenticated, restrictTo('admin'), catchAsync(deleteProduct)).patch(isAuthenticated, restrictTo('admin'), upload.single("productImage"), catchAsync(editProduct))
+
+//Adi authorized xa vane adminlai matra product create garna diney!
 
 module.exports = router;
