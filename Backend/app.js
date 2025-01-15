@@ -15,6 +15,7 @@ const {
 const authRoute = require("./routes/aut/authRoute");
 const productRoute = require("./routes/product/productRoute");
 const adminUserRoute = require('./routes/adminUser/adminUser')
+const userReviewRoute = require('./routes/userReviewRoute/userReviewRout')
 
 //Routes end here
 
@@ -36,6 +37,7 @@ app.get("/", (req, res) => {
 app.use("", authRoute);
 app.use("", productRoute);
 app.use("", adminUserRoute);
+app.use("", userReviewRoute)
 
 //telling node to give access to uploads
 app.use(express.static("uploads"));
