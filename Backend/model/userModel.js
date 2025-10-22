@@ -34,6 +34,7 @@ const userSchema = new Schema({
     default: false,
     select: false
   },
+  cart: [{type: Schema.Types.ObjectId, ref: "Product"}]
 }, {
   timestamps: true
 });
