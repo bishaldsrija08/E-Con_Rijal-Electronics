@@ -27,12 +27,12 @@ const userSchema = new Schema({
   },
   otp: {
     type: Number,
-    select: false
+    select: true
   },
   isOtpVerified: {
     type: Boolean,
     default: false,
-    select: false
+    select: true
   },
   cart: [{ type: Schema.Types.ObjectId, ref: "Product" }]
 }, {
