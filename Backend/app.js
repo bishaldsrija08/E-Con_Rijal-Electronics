@@ -3,6 +3,9 @@ const { connectDB } = require('./database/database')
 const app = express()
 const { registerUser, loginUser, forgotPassword } = require('./controllers/auth/authControllerr')
 
+// upload folder access
+app.use(express.static('uploads'))
+
 // Dot env configuration
 require('dotenv').config()
 

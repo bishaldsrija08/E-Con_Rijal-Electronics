@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
 const User = require('../model/userModel');
+// Check if user is logged in or not
 const isAuthenticated = async (req, res, next) => {
     try {
         const token = req.headers.authorization;
