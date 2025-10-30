@@ -18,21 +18,22 @@ const userSchema = new Schema({
   userPassword: {
     type: String,
     required: [true, "Password must be provided"],
-    // select: false
+    select: false
   },
   userRole: {
     type: String,
     enum: ["customer", "admin"],
     default: "customer",
+    // select: false
   },
   otp: {
     type: Number,
-    select: true
+    select: false
   },
   isOtpVerified: {
     type: Boolean,
     default: false,
-    select: true
+    select: false
   },
   cart: [{ type: Schema.Types.ObjectId, ref: "Product" }]
 }, {

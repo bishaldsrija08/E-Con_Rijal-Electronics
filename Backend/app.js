@@ -19,6 +19,9 @@ connectDB()
 // Routes here
 const authRoutes = require('./routes/aut/authRoutes')
 const productRoutes = require('./routes/product/productRoutes')
+const adminUserRoutes = require('./routes/adminUser/adminUser')
+
+app.use('/api', adminUserRoutes)
 app.use('/api', authRoutes)
 app.use('/api', productRoutes)
 // /api/paths

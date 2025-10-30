@@ -1,5 +1,5 @@
 const Product = require("../../../model/productModel");
-
+const fs = require('fs');
 exports.createProduct = async (req, res) => {
     const file = req.file;
     let filePath = ""
@@ -44,7 +44,7 @@ exports.getAllProducts = async (req, res) => {
 // Get single product by ID
 exports.getProductById = async (req, res) => {
     const { id } = req.params
-    const singleProduct = await Produc.findById(id);
+    const singleProduct = await Product.findById(id);
     if (!singleProduct) {
         return res.status(404).json({ message: "Product not found." });
     }
@@ -52,4 +52,62 @@ exports.getProductById = async (req, res) => {
         message: "Product retrieved successfully",
         product: singleProduct
     })
+}
+
+// Update product by ID
+exports.updateProductById = async (req, res) => {
+    const { id } = req.params;
+    const { productName, productDescription, productStockQty, productPrice, productStatus } = req.body;
+    if (!productName || !productDescription || !productStockQty || !productPrice || !productStatus || !id) {
+        return res.status(400).json({ message: "All required fields must be provided." });
+    }
+    const oldProductData = await Product.findById(id);
+    if (!oldProductData) {
+        return res.status(404).json({ message: "Product not found." });
+    }
+    const oldImagePath = oldProductData.productImage;
+    if (req.file && req.file.filename) {
+        fs.unlink("uploads/" + oldImagePath, (err) => {
+            if (err) {
+                console.log("Error occurred while deleting old image:", err);
+            } else {
+                console.log("Old image deleted successfully");
+            }
+        })
+    }
+    await Product.findByIdAndUpdate(id, {
+        productName,
+        productDescription,
+        productStockQty,
+        productPrice,
+        productStatus,
+        productImage: req.file && req.file.filename ? req.file.filename : oldImagePath
+    })
+    res.status(200).json({
+        message: "Product updated successfully"
+    })
+
+}
+
+// Delete product by ID
+exports.deleteProductById = async (req, res) => {
+    const { id } = req.params;
+    if (!id) {
+        return res.status(400).json({ message: "Product ID is required." });
+    }
+    const isProductExist = await Product.findById(id)
+    if (!isProductExist) {
+        return res.status(404).json({ message: "Product not found." });
+    }
+    const imagePath = isProductExist.productImage;
+    fs.unlink("uploads/" + imagePath, (err) => {
+        if (err) {
+            console.log("Error occurred while deleting old image:", err);
+        } else {
+            console.log("Old image deleted successfully");
+        }
+    })
+
+    await Product.findByIdAndDelete(id);
+    res.status(200).json({ message: "Product deleted successfully." });
 }
