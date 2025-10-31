@@ -86,7 +86,6 @@ exports.updateProductById = async (req, res) => {
     res.status(200).json({
         message: "Product updated successfully"
     })
-
 }
 
 // Delete product by ID

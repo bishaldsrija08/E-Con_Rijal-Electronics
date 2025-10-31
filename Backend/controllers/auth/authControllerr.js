@@ -28,7 +28,7 @@ exports.loginUser = async (req, res) => {
             message: "Invalid credentials"
         })
     }
-
+    console.log(userEmail, userPassword, isUserExist.userPassword)
     // Check password
     const isPasswordCorrect = bcrypt.compareSync(userPassword, isUserExist.userPassword)
     if (!isPasswordCorrect) {
@@ -109,7 +109,7 @@ exports.verifyOtp = async (req, res) => {
             message: "Invalid OTP"
         })
     }
-    
+
     isUserExist.isOtpVerified = true
     await isUserExist.save()
 

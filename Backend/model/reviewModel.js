@@ -23,7 +23,6 @@ const reviewSchema = new Schema({
         type: String,
         required: true
     }
-
 })
 
 const Review = mongoose.model("Review", reviewSchema)
