@@ -1,7 +1,6 @@
 const express = require('express')
 const { connectDB } = require('./database/database')
 const app = express()
-const { registerUser, loginUser, forgotPassword } = require('./controllers/auth/authControllerr')
 
 // upload folder access
 app.use(express.static('uploads'))
@@ -18,7 +17,7 @@ connectDB()
 
 // Routes here
 const authRoutes = require('./routes/aut/authRoutes')
-const productRoutes = require('./routes/product/productRoutes')
+const productRoutes = require('./routes/adminUser/product/productRoutes')
 const adminUserRoutes = require('./routes/adminUser/adminUser')
 const userReviewRoutes = require('./routes/userReviewRoute/userReviewRoutes')
 

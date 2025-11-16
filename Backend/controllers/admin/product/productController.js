@@ -28,32 +28,6 @@ exports.createProduct = async (req, res) => {
     })
 }
 
-// Get all products
-
-exports.getAllProducts = async (req, res) => {
-    const products = await Product.find();
-    if (products.length === 0) {
-        return res.status(404).json({ message: "No products found.", products: [] });
-    }
-    res.status(200).json({
-        message: "Products retrieved successfully",
-        products
-    })
-}
-
-// Get single product by ID
-exports.getProductById = async (req, res) => {
-    const { id } = req.params
-    const singleProduct = await Product.findById(id);
-    if (!singleProduct) {
-        return res.status(404).json({ message: "Product not found." });
-    }
-    res.status(200).json({
-        message: "Product retrieved successfully",
-        product: singleProduct
-    })
-}
-
 // Update product by ID
 exports.updateProductById = async (req, res) => {
     const { id } = req.params;

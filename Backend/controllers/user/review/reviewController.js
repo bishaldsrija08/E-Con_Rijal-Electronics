@@ -1,6 +1,3 @@
-const Product = require("../../model/productModel")
-const Review = require("../../model/reviewModel")
-
 exports.createReview = async (req, res) => {
     const userId = req.user.id
     const productId = req.params.id
@@ -45,12 +42,31 @@ exports.getProductReviews = async (req, res) => {
 
 // Delete a review
 exports.deleteReview = async (req, res) => {
+    const userId = req.user.id
     const reviewId = req.params.id
     if (!reviewId) {
         return res.status(400).json({ error: 'Review ID is required' })
     }
+    const review = await Review.findById(reviewId)
+    const ownerId = review.userId
+    if (ownerId !== userId) {
+        return res.status(403).json({ message: 'You are not authorized to delete this review' })
+    }
     await Review.findByIdAndDelete(reviewId)
     return res.status(200).json({
         message: 'Review deleted successfully'
+    })
+}
+
+// Get my reviews
+exports.getMyReviews = async (req, res) => {
+    const userId = req.user.id
+    const reviews = await Review.find({ userId })
+    if (reviews.length === 0) {
+        return res.status(404).json({ message: "No reviews found.", reviews: [] });
+    }
+    return res.status(200).json({
+        message: 'My reviews fetched successfully',
+        reviews
     })
 }
