@@ -38,7 +38,7 @@ exports.getProductReviews = async (req, res) => {
         message: 'Product reviews fetched successfully',
         data: reviews
     })
-}
+}   
 
 // Delete a review
 exports.deleteReview = async (req, res) => {

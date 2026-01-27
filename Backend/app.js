@@ -20,11 +20,13 @@ const authRoutes = require('./routes/aut/authRoutes')
 const productRoutes = require('./routes/adminUser/product/productRoutes')
 const adminUserRoutes = require('./routes/adminUser/adminUser')
 const userReviewRoutes = require('./routes/userReviewRoute/userReviewRoutes')
+const cartRoutes = require('./routes/cart/cartRoutes')
 
 app.use('/api', adminUserRoutes)
 app.use('/api', authRoutes)
 app.use('/api', productRoutes)
 app.use('/api', userReviewRoutes)
+app.use('/api', cartRoutes)
 // /api/paths
 
 
