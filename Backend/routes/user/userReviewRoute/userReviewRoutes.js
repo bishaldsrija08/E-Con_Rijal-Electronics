@@ -1,6 +1,6 @@
-const { getMyReviews, deleteReview, createReview } = require('../../controllers/user/review/reviewController');
-const isAuthenticated = require('../../middleware/isAuthenticated');
-const catchAsync = require('../../services/catchAsync');
+const { getMyReviews, deleteReview, createReview } = require('../../../controllers/user/review/reviewController');
+const isAuthenticated = require('../../../middleware/isAuthenticated');
+const catchAsync = require('../../../services/catchAsync');
 
 const router = require('express').Router();
 

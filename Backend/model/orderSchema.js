@@ -1,6 +1,5 @@
 
 
-const e = require('express');
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
@@ -35,13 +34,13 @@ const orderSchema = new mongoose.Schema({
     },
     paymentDetails: {
         method: {
-            type: string,
+            type: String,
             enum: ["Khalti", "Esewa", "Cash on Delivery"],
             required: true,
             default: "Cash on Delivery"
         },
         paymentStatus: {
-            type: string,
+            type: String,
             enum: ["Paid", "Unpaid"],
             default: "Unpaid"
         }
