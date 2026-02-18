@@ -9,7 +9,7 @@ exports.getAllProducts = async (req, res) => {
     }
     res.status(200).json({
         message: "Products retrieved successfully",
-        products
+        data:products
     })
 }
 

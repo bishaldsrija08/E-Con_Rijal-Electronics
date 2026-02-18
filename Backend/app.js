@@ -2,6 +2,13 @@ const express = require('express')
 const { connectDB } = require('./database/database')
 const app = express()
 
+// Cors configuration
+const cors = require('cors')
+app.use(cors({
+  origin: "http://localhost:5173"
+}));
+    
+
 // upload folder access
 app.use(express.static('uploads'))
 
@@ -30,9 +37,8 @@ app.use('/api', userReviewRoutes)
 app.use('/api', cartRoutes)
 app.use('/api', orderRoutes)
 // /api/paths
-
-
 // Routes end here
+
 
 // Server start
 const port = process.env.PORT || 3000
